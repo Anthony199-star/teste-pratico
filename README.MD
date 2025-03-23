@@ -43,7 +43,7 @@ Instale as dependências do projeto
 
 bash
 npm install
-Configure o Banco de Dados
+Configure o Banco de Dados:
 
 Abra o MySQL e crie o banco de dados com o nome teste_pratico.
 
