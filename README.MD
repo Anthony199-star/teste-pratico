@@ -13,7 +13,7 @@ Estrutura do Projeto
   │     └── estilo.css
   ├── package.json
   └── README.md
-- Tecnologias Utilizadas
+- Tecnologias Utilizadas:
 - Node.js: Framework de servidor JavaScript;
 - Express: Framework web para Node.js;
 - MySQL: Banco de dados relacional;
