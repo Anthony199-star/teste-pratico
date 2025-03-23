@@ -1,0 +1,280 @@
+
+PACKAGE.JSON
+{
+  "name": "teste-pratico",
+  "version": "1.0.0",
+  "description": "Teste pratico ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mysql",
+    "bootstrap",
+    "express",
+    "node"
+  ],
+  "author": "Anthony Heder Rodrigues Calixto",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
+    "express-handlebars": "^8.0.1",
+    "mysql2": "^3.14.0",
+    "nodemon": "^3.1.9"
+  }
+}
+
+
+
+APP.JS
+
+// Importar modulo express
+const express = require('express');
+
+// Importar modulo mysql
+const mysql = require('mysql2');
+
+// Importar modulo express-fileupload
+const fileupload = require('express-fileupload');
+
+// App - criar variavel
+const app = express();
+
+// Habilitar upload dos arquivos
+app.use(fileupload());
+
+// Adicionar bootstrap
+app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
+
+// Adicionar o css
+app.use('/css', express.static('./css'));
+
+// Importar modulo express-handlebars
+const { engine } = require('express-handlebars');
+
+// Configurar o handlebars
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+// Manipulação dos dados via rotas
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Configurar conexão
+const conexao = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'teste_pratico'
+});
+
+// Testar conexão
+conexao.connect(function(erro) {
+    if (erro) throw erro;
+    console.log('Conexão ok');
+});
+
+// Rota - criar rota principal
+app.get('/', function(req, res) {
+    // SQL para listar os usuários
+    let sql = 'SELECT * FROM cadastro';
+    // Executar comando SQL
+    conexao.query(sql, function(erro, retorno) {
+        if (erro) {
+            console.error('Erro ao buscar usuários:', erro);
+            res.status(500).send('Erro ao carregar a lista de usuários.');
+            return;
+        }
+        res.render('cadastro', { cadastro: retorno });
+    });
+});
+
+
+// Rota de cadastro
+app.post('/cadastrar', function(req, res) {
+    // Dados para cadastro
+    let nome = req.body.Nome;
+    let email = req.body.Email;
+    let data = req.body.Data_nacimento;
+
+    // SQL para inserir os dados
+    let sql = `INSERT INTO cadastro(Nome, Email, Data_nacimento) VALUES ('${nome}', '${email}', '${data}')`;
+
+    // Executar o comando SQL
+    conexao.query(sql, function(erro) {
+        if (erro) {
+            console.error('Erro ao cadastrar:', erro);
+            res.status(500).send('Erro ao cadastrar os dados.');
+            return;
+        }
+        res.redirect('/'); // Retorna para a página de cadastro após salvar
+    });
+});
+
+// Rota para exibir o formulário de edição
+app.get('/editar/:id_usuario', function(req, res) {
+    const id_usuario = req.params.id_usuario;
+
+    let sql = 'SELECT * FROM cadastro WHERE id_usuario = ?';
+    conexao.query(sql, [id_usuario], function(erro, retorno) {
+        if (erro) {
+            console.error('Erro ao buscar usuário:', erro);
+            res.status(500).send('Erro ao carregar o formulário de edição.');
+            return;
+        }
+        res.render('EditarLista', { cadastro: retorno[0] });
+    });
+});
+
+// Rota para atualizar os dados no banco
+app.post('/editar/:id_usuario', function(req, res) {
+    const id_usuario = req.params.id_usuario; // ID passado na URL
+    const { Nome, Email, Data_nacimento } = req.body; // Dados enviados pelo formulário
+
+    // SQL
+    let sql = 'UPDATE cadastro SET Nome = ?, Email = ?, Data_nacimento = ? WHERE id_usuario = ?';
+    // Executar o comando SQL com os parâmetros corretos
+    conexao.query(sql, [Nome, Email, Data_nacimento, id_usuario], function(erro) {
+        if (erro) {
+            console.error('Erro ao editar usuário:', erro);
+            res.status(500).send('Erro ao atualizar os dados.');
+            return;
+        }
+        res.redirect('/ListaUsuarios'); // Redireciona para a página de lista de usuários após editar
+    });
+});
+
+// Rota para remover usuário
+app.get('/remover/:id_usuario', function(req, res) {
+    const id_usuario = req.params.id_usuario;
+
+    let sql = 'DELETE FROM cadastro WHERE id_usuario = ?';
+    conexao.query(sql, [id_usuario], function(erro) {
+        if (erro) {
+            console.error('Erro ao remover usuário:', erro);
+            res.status(500).send('Erro ao remover o cadastro.');
+            return;
+        }
+        res.redirect('/ListaUsuarios'); // Redireciona para a página de lista de usuários após remover
+    });
+});
+
+// Rota para exibir a lista de usuários
+app.get('/ListaUsuarios', function(req, res) {
+    // SQL para buscar todos os usuários
+    let sql = 'SELECT * FROM cadastro';
+    
+    // Executar comando SQL
+    conexao.query(sql, function(erro, retorno) {
+        if (erro) {
+            console.error('Erro ao buscar usuários:', erro);
+            res.status(500).send('Erro ao carregar a lista de usuários.');
+            return;
+        }
+        res.render('ListaUsuarios', { cadastro: retorno }); // Renderiza a view 'ListaUsuarios'
+    });
+});
+
+// Criar servidor
+app.listen(8080, () => {
+    console.log('Servidor rodando em http://localhost:8080');
+});
+
+
+MAIN
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Pratico</title>
+    {{!--BOOTSTRAP--}}
+    <link rel="stylesheet" href="bootstrap/css/boostrap.min.css">
+
+    {{!-- CSS--}}
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    {{{body}}}
+</body>
+</html>
+
+
+
+
+CADASTRO
+<main>
+    <div class="container">
+        <div class="box">
+            <h1>Cadastro</h1>
+            <form action="/cadastrar" method="post" enctype="multipart/form-data">
+                <input type="text" name="Nome" placeholder="Nome" required>
+                <input type="text" name="Email" placeholder="Email" required>
+                <input type="date" name="Data_nacimento" required>
+
+                <input type="submit" class="btn-primary" value="Cadastrar">
+                <input type="reset" value="Limpar">
+                <button type="button" class="btn-info" onclick="window.location.href='/ListaUsuarios';">Lista de Usuários</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+
+LISTA USUARIOS
+<main>
+    <div class="container">
+        <div class="box">
+            <h1>Lista de Usuários</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Data de Nascimento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cadastro}}
+                    <tr>
+                        <td>{{Nome}}</td>
+                        <td>{{Email}}</td>
+                        <td>{{Data_nacimento}}</td>
+                        <td>
+                            <a href="/editar/{{id_usuario}}" class="btn-warning">Editar</a>
+                            <a href="/remover/{{id_usuario}}" class="btn-danger">Remover</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <button class="btn btn-info" onclick="window.location.href='/';">Retornar ao Cadastro</button>
+        </div>
+    </div>
+</main>
+
+
+
+EDITAR LISTA
+<main>
+    <div class="container">
+        <div class="box">
+            <h1>Editar Usuário</h1>
+            <form action="/editar/{{cadastro.id_usuario}}" method="post">
+                <input type="text" name="Nome" placeholder="Nome" value="{{cadastro.Nome}}" required>
+                <input type="text" name="Email" placeholder="Email" value="{{cadastro.Email}}" required>
+                <input type="date" name="Data_nacimento" value="{{cadastro.Data_nacimento}}" required>
+                <input type="submit" class="btn-primary" value="Salvar">
+            </form>
+        </div>
+    </div>
+</main>
+
+
+
