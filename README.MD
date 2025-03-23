@@ -13,43 +13,31 @@ Estrutura do Projeto
   │     └── estilo.css
   ├── package.json
   └── README.md
-Tecnologias Utilizadas
-Node.js: Framework de servidor JavaScript.
-
-Express: Framework web para Node.js..
-
-MySQL: Banco de dados relacional.
-
-Handlebars: Template engine para renderizar HTML dinâmico.
-
-Bootstrap: Framework CSS para estilização.
-
-CSS: Estilos customizados adicionais.
+- Tecnologias Utilizadas
+- Node.js: Framework de servidor JavaScript;
+- Express: Framework web para Node.js;
+- MySQL: Banco de dados relacional;
+- Handlebars: Template engine para renderizar HTML dinâmico;
+- Bootstrap: Framework CSS para estilização;
+- CSS: Estilos customizados adicionais;
 
 Configuração e Execução
 1. Pré-requisitos
 Certifique-se de ter instaladas as seguintes ferramentas:
+-Node.js
+-MySQL
 
-Node.js
-
-MySQL
-
-2. Clone o Repositório
-bash
-git clone SEU_LINK_DO_REPOSITORIO_AQUI
-cd teste-pratico
-3. Instale as Dependências
+2. Instale as Dependências
 Execute o comando abaixo para instalar as dependências necessárias:
 
 bash
 npm install
-4. Configure o Banco de Dados
-Acesse o MySQL e crie o banco de dados:
 
+3. Configure o Banco de Dados
+Acesse o MySQL e crie o banco de dados:
 sql
 CREATE DATABASE teste_pratico;
 Crie a tabela cadastro:
-
 sql
 CREATE TABLE cadastro (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,7 +45,7 @@ CREATE TABLE cadastro (
     Email VARCHAR(100),
     Data_nacimento DATE
 );
-5. Execute a Aplicação
+4. Execute a Aplicação
 Inicie o servidor com o comando:
 
 bash
