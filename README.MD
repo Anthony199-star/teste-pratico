@@ -113,6 +113,6 @@ npm install
 ✨ Autor
 Anthony Heder Rodrigues Calixto Contato e redes sociais:
 
-LinkedIn: Seu LinkedIn
+LinkedIn: https://www.linkedin.com/in/anthony-heder-3b116b350?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BKIj%2BPnyQRweBI1jxHER69w%3D%3D
 
-GitHub: Seu GitHub
+Email: anthonyheder25@gmail.com
