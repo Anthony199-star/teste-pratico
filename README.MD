@@ -35,9 +35,6 @@ Certifique-se de ter instalado em sua máquina:
 
 ### **Passos para configurar o projeto**
 
-1. **Clone o repositório**
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
 Entre no diretório do projeto
 
 bash
