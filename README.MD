@@ -24,8 +24,8 @@ Estrutura do Projeto
 Configuração e Execução
 1. Pré-requisitos
 Certifique-se de ter instaladas as seguintes ferramentas:
--Node.js
--MySQL
+Node.js
+MySQL
 
 2. Instale as Dependências
 Execute o comando abaixo para instalar as dependências necessárias:
