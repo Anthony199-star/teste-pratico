@@ -1,91 +1,121 @@
-Teste Prático – Cadastro de Usuários
-Esta aplicação é uma solução para cadastro, edição, exclusão e listagem de usuários. Utiliza Node.js, Express e MySQL, juntamente com Handlebars e CSS para exibição e estilização.
+# Teste Prático
 
-Estrutura do Projeto
-/teste-pratico
-  ├── app.js
-  ├── /views
-  │     ├── cadastro.handlebars
-  │     ├── ListaUsuarios.handlebars
-  │     ├── EditarLista.handlebars
-  │     └── layouts/main.handlebars
-  ├── /css
-  │     └── estilo.css
-  ├── package.json
-  └── README.md
-- Tecnologias Utilizadas:
-- Node.js: Framework de servidor JavaScript;
-- Express: Framework web para Node.js;
-- MySQL: Banco de dados relacional;
-- Handlebars: Template engine para renderizar HTML dinâmico;
-- Bootstrap: Framework CSS para estilização;
-- CSS: Estilos customizados adicionais;
+Este projeto é uma aplicação web desenvolvida em **Node.js** com **Express**, conectada a um banco de dados MySQL. O objetivo é implementar um sistema simples de **cadastro**, **edição**, **remoção** e **listagem** de usuários.
 
-Configuração e Execução
-1. Pré-requisitos
-Certifique-se de ter instaladas as seguintes ferramentas:
-Node.js
-MySQL
+---
 
-2. Instale as Dependências
-Execute o comando abaixo para instalar as dependências necessárias:
+## 🛠 Tecnologias Utilizadas
+
+- **Node.js**: Ambiente de execução JavaScript para o back-end.
+- **Express**: Framework para criação de servidores e gerenciamento de rotas.
+- **MySQL**: Sistema de banco de dados relacional.
+- **Handlebars**: Mecanismo de template para renderização dinâmica de páginas HTML.
+- **Bootstrap**: Framework para estilização e responsividade.
+- **Nodemon**: Ferramenta para desenvolvimento, que reinicia automaticamente o servidor após alterações.
+
+---
+
+## 📂 Estrutura do Projeto
+
+- **`app.js`**: Arquivo principal que configura o servidor Express, define as rotas e gerencia a conexão com o banco de dados MySQL.
+- **`views/`**: Contém os arquivos Handlebars responsáveis por renderizar as páginas HTML do projeto.
+- **`css/`**: Diretório para estilos personalizados em CSS.
+- **`node_modules/`**: Diretório gerado pelo npm, onde estão as dependências instaladas.
+- **`package.json`**: Arquivo de configuração do projeto Node.js, listando dependências e scripts.
+
+---
+
+## 🚀 Configuração e Instalação
+
+### **Pré-requisitos**
+Certifique-se de ter instalado em sua máquina:
+- **Node.js** (v16 ou superior)
+- **MySQL**
+- **npm** (Node Package Manager)
+
+### **Passos para configurar o projeto**
+
+1. **Clone o repositório**
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+Entre no diretório do projeto
+
+bash
+cd teste-pratico
+Instale as dependências do projeto
 
 bash
 npm install
+Configure o Banco de Dados
 
-3. Configure o Banco de Dados
-Acesse o MySQL e crie o banco de dados:
-sql
-CREATE DATABASE teste_pratico;
-Crie a tabela cadastro:
+Abra o MySQL e crie o banco de dados com o nome teste_pratico.
+
+Crie a tabela necessária para o sistema:
+
 sql
 CREATE TABLE cadastro (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100),
-    Email VARCHAR(100),
+    Nome VARCHAR(255),
+    Email VARCHAR(255),
     Data_nacimento DATE
 );
-4. Execute a Aplicação
-Inicie o servidor com o comando:
+Inicie o Servidor
+
+Para iniciar o servidor com reinicialização automática, use o Nodemon:
 
 bash
-node app.js
-Abra o navegador e acesse: http://localhost:8080
+npx nodemon app.js
+O servidor será iniciado em http://localhost:8080.
+
+🧑‍💻 Utilização
+Rotas Principais
+/: Página principal, exibe o formulário de cadastro de usuários.
+
+/ListaUsuarios: Lista todos os usuários cadastrados no banco de dados.
+
+/editar/:id_usuario: Exibe o formulário para edição de um usuário com base no ID.
+
+/remover/:id_usuario: Remove o usuário do banco de dados com base no ID.
 
 Funcionalidades
 Cadastro de Usuários
 
-Permite adicionar usuários com Nome, E-mail e Data de Nascimento.
+Preencha os campos no formulário da página inicial e clique no botão "Cadastrar".
 
-Listagem de Usuários
+O usuário será salvo no banco de dados e listado na página de usuários.
 
-Exibe uma tabela com todos os usuários cadastrados.
+Edição de Usuários
 
-Campo de pesquisa para filtrar usuários pelo nome.
+Na lista de usuários, clique no botão "Editar" correspondente.
 
-Editar Usuários
+Atualize as informações no formulário e clique em "Salvar".
 
-Permite alterar os dados de um usuário já cadastrado.
+Remoção de Usuários
 
-Excluir Usuários
+Na lista de usuários, clique no botão "Remover" para excluir um registro.
 
-Remove um usuário da base de dados.
+📋 Dependências Instaladas
+As principais dependências do projeto estão listadas no arquivo package.json:
 
-Estrutura dos Arquivos
-app.js
-Arquivo principal que configura o servidor, rotas e conexão com o banco de dados MySQL.
+Express: Framework web para gerenciamento de rotas.
 
-Views
-Arquivos de templates Handlebars usados para renderizar as páginas HTML dinâmicas.
+Express-Fileupload: Suporte para upload de arquivos.
 
-cadastro.handlebars: Tela de cadastro de usuários.
+Express-Handlebars: Renderização dinâmica de páginas.
 
-ListaUsuarios.handlebars: Tela de listagem de usuários com opções de edição e exclusão.
+MySQL2: Driver para conexão com o banco de dados.
 
-EditarLista.handlebars: Tela para editar os dados de um usuário.
+Bootstrap: Estilização responsiva com classes pré-definidas.
 
-CSS
-Estilos personalizados no arquivo estilo.css.
+Nodemon: Atualização automática do servidor durante o desenvolvimento.
 
-Contato
-Caso tenha dúvidas ou sugestões, entre em contato em: anthonyheder25@gmail.com
+Para instalar todas as dependências, basta rodar:
+
+bash
+npm install
+✨ Autor
+Anthony Heder Rodrigues Calixto Contato e redes sociais:
+
+LinkedIn: Seu LinkedIn
+
+GitHub: Seu GitHub
