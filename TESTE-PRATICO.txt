@@ -301,6 +301,32 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Estilo dos títulos */
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+}
+
 /* Inputs e botões */
 input[type="text"], input[type="date"], input[type="submit"], input[type="reset"], .btn-info, .btn-primary, .btn-warning, .btn-danger {
     display: block;
@@ -347,6 +373,40 @@ input[type="reset"] {
     padding: 10px;
 }
 
+/* Botões menores e organizados na aba Cadastro */
+.cadastro-container form input[type="submit"],
+.cadastro-container form input[type="reset"] {
+    width: 120px; /* Reduz a largura */
+    margin: 5px; /* Espaçamento entre os botões */
+    padding: 8px; /* Reduz o tamanho interno */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Botão de Lista de Usuários no canto superior direito */
+.cadastro-container .top-buttons {
+    position: absolute; /* Posiciona no canto superior */
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+}
+
+.cadastro-container .top-buttons button {
+    padding: 8px 12px; /* Tamanho interno */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    background: #0275d8; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remove bordas padrão */
+    cursor: pointer; /* Mãozinha no hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.cadastro-container .top-buttons button:hover {
+    background-color: #333; /* Cor escura no hover */
+    color: #fff; /* Cor do texto */
+}
+
 /* Estilizando a tabela */
 table {
     width: 100%;
@@ -389,7 +449,7 @@ button {
     background: #0275d8;
     color: white;
     border: none;
-}
+}     
 
 
 
